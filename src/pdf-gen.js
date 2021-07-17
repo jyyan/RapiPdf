@@ -38,8 +38,8 @@ export default async function createPdf(specUrl, options) {
     darkGray: { color: '#666666' },
     red: { color: 'orangered' },
     blue: { color: '#005b96' },
-    mono: { font: 'RobotoMono', fontSize: 10 },
-    monoSub: { font: 'RobotoMono', fontSize: 8 },
+    mono: { font: 'Sans', fontSize: 10 },
+    monoSub: { font: 'Sans', fontSize: 8 },
   };
 
   const allContent = [];
@@ -88,6 +88,9 @@ export default async function createPdf(specUrl, options) {
         ],
       };
     },
+    defaultStyle: {
+      font: 'Sans',
+    },
     content: allContent,
     styles: pdfStyles,
   };
@@ -106,9 +109,14 @@ export default async function createPdf(specUrl, options) {
       italics: 'RobotoMono-Regular.ttf',
       bolditalics: 'RobotoMono-Regular.ttf',
     },
-
+    Sans: {
+      normal: 'SourceHanSansTC-VF.ttf',
+      bold: 'SourceHanSansTC-VF.ttf',
+      italics: 'SourceHanSansTC-VF.ttf',
+      bolditalics: 'SourceHanSansTC-VF.ttf',
+    },
   };
   // pdfMake.vfs = pdfFonts.pdfMake.vfs;
   pdfMake.vfs = pdfFonts;
-  pdfMake.createPdf(finalDocDef).open();
+  pdfMake.createPdf(finalDocDef).download('api-document.pdf');
 }
